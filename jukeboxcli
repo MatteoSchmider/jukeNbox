@@ -1,0 +1,84 @@
+#!/usr/bin/env python
+
+import click
+import requests
+
+MAC_ADDRESS = 'c0:b8:83:33:c0:89'
+
+
+__author__ = "Matteo Schmider"
+
+song_body = {
+'id': 1,
+'method':'slim.request',
+'params':
+    [MAC_ADDRESS,
+        ['spotty', 'playlist', "play", 'menu:spotty']
+    ]
+}
+
+command_body = {
+'id': 1,
+'method':'slim.request',
+'params':
+    [MAC_ADDRESS]
+}
+
+url = "http://localhost:9000/jsonrpc.js"
+
+@click.group()
+def main():
+    """
+    Command Line Interface for controlling the jukebox
+    """
+    pass
+
+
+def make_cmd(commands):
+    cmd = command_body
+    cmd['params'].append(commands)
+    return cmd
+
+
+@main.command()
+@click.argument('songname')
+def play_song(songname):
+    req = song_body
+    req['params'][1].append('item_id:1.0_' + songname +  '.6')
+    requests.post(url, json=req)
+
+
+@main.command()
+def play():
+    requests.post(url, json=make_cmd(['play']))
+
+
+@main.command()
+def pause():
+    requests.post(url, json=make_cmd(['pause']))
+
+
+@main.command()
+@click.argument('amount')
+def volume_up(amount):
+    requests.post(url, json=make_cmd(['mixer', 'volume', '+' + amount]))
+
+
+@main.command()
+@click.argument('amount')
+def volume_down(amount):
+    requests.post(url, json=make_cmd(['mixer', 'volume', '-' + amount]))
+
+
+@main.command()
+def skip():
+    requests.post(url, json=make_cmd(['playlist', 'index', '+1']))
+
+
+@main.command()
+def previous():
+    requests.post(url, json=make_cmd(['playlist', 'index', '-1']))
+
+
+if __name__ == "__main__":
+    main()

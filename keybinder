@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+
+import os.path
+import yaml
+import click
+import requests
+
+USER = 'matteo'
+
+default_cfg = {
+  'a': 'play',
+  'b': 'pause',
+  'c': 'volume-up 5',
+  'd': 'volume-down 5',
+  'e': 'skip',
+  'f': 'previous',
+  'g': 'play-song "We like to party"'
+}
+
+
+def get_file():
+    if os.path.isdir('/home/' + USER + '/Schreibtisch'):
+        return '/home/' + USER + '/Schreibtisch/keybinds.yaml'
+    return '/home/' + USER + '/Desktop/keybinds.yaml'
+
+
+@click.command()
+@click.argument('key')
+def main(key):
+    # default config
+    cfg = default_cfg
+    # load user config
+    if os.path.isfile(get_file()):
+        with open(get_file(), 'r') as ymlfile:
+            cfg = yaml.load(ymlfile, Loader=yaml.BaseLoader)
+    os.system('jukeboxcli ' + str(cfg.get(key)))
+    with open(get_file(), 'w') as file:
+        yaml.dump(cfg, file)
+
+
+if __name__ == "__main__":
+    main()
