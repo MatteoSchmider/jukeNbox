@@ -16,7 +16,7 @@ fi
 RPI=1
 
 LMS="http://downloads.slimdevices.com/LogitechMediaServer_v8.3.0/logitechmediaserver_8.3.0_arm.deb"
-SQUEEZE="https://sourceforge.net/projects/lmsclients/files/squeezelite/linux/squeezelite-1.9.9.1392-aarch64.tar.gz/download"
+SQUEEZE="https://sourceforge.net/projects/lmsclients/files/squeezelite/linux/squeezelite-1.9.9.1430-armhf.tar.gz/download"
 
 if [ "$RPI" -eq "0" ];
 then
