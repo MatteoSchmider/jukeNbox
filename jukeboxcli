@@ -26,6 +26,14 @@ command_body = {
 
 url = "http://localhost:9000/jsonrpc.js"
 
+headers = requests.utils.default_headers()
+
+headers.update(
+    {
+        'User-Agent': 'My User Agent 1.0',
+    }
+)
+
 @click.group()
 def main():
     """
@@ -45,39 +53,39 @@ def make_cmd(commands):
 def play_song(songname):
     req = song_body
     req['params'][1].append('item_id:1.0_' + songname +  '.6')
-    requests.post(url, json=req)
+    requests.post(url, json=req, headers=headers)
 
 
 @main.command()
 def play():
-    requests.post(url, json=make_cmd(['play']))
+    requests.post(url, json=make_cmd(['play']), headers=headers)
 
 
 @main.command()
 def pause():
-    requests.post(url, json=make_cmd(['pause']))
+    requests.post(url, json=make_cmd(['pause']), headers=headers)
 
 
 @main.command()
 @click.argument('amount')
 def volume_up(amount):
-    requests.post(url, json=make_cmd(['mixer', 'volume', '+' + amount]))
+    requests.post(url, json=make_cmd(['mixer', 'volume', '+' + amount]), headers=headers)
 
 
 @main.command()
 @click.argument('amount')
 def volume_down(amount):
-    requests.post(url, json=make_cmd(['mixer', 'volume', '-' + amount]))
+    requests.post(url, json=make_cmd(['mixer', 'volume', '-' + amount]), headers=headers)
 
 
 @main.command()
 def skip():
-    requests.post(url, json=make_cmd(['playlist', 'index', '+1']))
+    requests.post(url, json=make_cmd(['playlist', 'index', '+1']), headers=headers)
 
 
 @main.command()
 def previous():
-    requests.post(url, json=make_cmd(['playlist', 'index', '-1']))
+    requests.post(url, json=make_cmd(['playlist', 'index', '-1']), headers=headers)
 
 
 if __name__ == "__main__":
