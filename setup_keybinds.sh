@@ -10,12 +10,12 @@ if [ "$EUID" -ne 0 ]
 fi
 
 # remove user specific keybind config
-rm -rf /home/jukebox/.config/openbox
+rm -rf /home/pi/.config/openbox
 # replace system wide keybind config with our modified one
 cp -f lxde-pi-rc.xml /etc/xdg/openbox/lxde-pi-rc.xml
 
 # install dependency for keybinder script
-pip install -U click yaml requests
+pip install -U click pyyaml requests
 # install the keybinder script as command line tool
 cp -f keybinder /usr/local/bin/keybinder
 # install the jukeboxcli script as command line tool
