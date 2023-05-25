@@ -3,7 +3,7 @@
 import click
 import requests
 
-MAC_ADDRESS = '00:00:00:00:00:00'
+MAC_ADDRESS = 'e4:5f:01:a5:cd:c1'
 
 
 __author__ = "Matteo Schmider"
