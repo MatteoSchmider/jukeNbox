@@ -34,8 +34,6 @@ pip install pyyaml
 ###########################################################
 # get new packages
 apt-get update
-# setup user for autostart stuff
-useradd -m jukeboxuser || true
 
 # get the LMS debian package
 wget ${LMS} -O lms.deb
