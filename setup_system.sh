@@ -23,6 +23,12 @@ then
     LMS="http://downloads.slimdevices.com/LogitechMediaServer_v8.3.0/logitechmediaserver_8.3.0_amd64.deb"
     SQUEEZE="https://sourceforge.net/projects/lmsclients/files/squeezelite/linux/squeezelite-1.9.9.1414-x86_64.tar.gz/download"
 fi
+
+###########################################################
+# INSTALL DEPENDENCIES OF PYTHON SCRIPTS
+###########################################################
+pip install pyyaml
+
 ###########################################################
 # INSTALL LMS
 ###########################################################
