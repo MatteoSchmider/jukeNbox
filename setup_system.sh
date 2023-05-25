@@ -60,4 +60,4 @@ then
 fi
 # copy modified system files for autostart
 cp desktop.conf /etc/xdg/lxsession/LXDE-pi/desktop.conf -f
-cp autostart /etc/xdg/openbox/autostart -f
+cp autostart /home/pi/.config/lxsession/LXDE-pi/autostart -f
